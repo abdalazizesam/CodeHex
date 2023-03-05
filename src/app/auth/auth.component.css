@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.wrapper{
+    width: 330px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: #497174;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+}
+h1{
+    font-size: 2rem;
+    color: #EFF5F5;
+    margin-bottom: 1.2rem;
+}
+form {
+    background: #EFF5F5;
+    border-radius: 20px;
+}
+form input{
+    width: 92%;
+    outline: none;
+    border: 1px solid gray;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 20px;
+    background: #D6E4E5;
+}
+form button {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    padding: 10px 0;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    width: 50%;
+    color: #000000;
+    cursor: pointer;
+}
+#signin-btn{
+ background: #82CD47;
+}
+#signin-btn:hover{
+    background: #6b9947;
+}
+#signup-btn{
+    background: #F49D1A;
+}
+#signup-btn:hover{
+    background: #b88a45;
+}
+form input:hover{
+    border: 1px solid rgb(0, 140, 255);
+}
+form input:focus{
+    border: 1px solid #000000;
+}
+
+.member{
+    font-size: 1.4rem;
+    margin-top: 1.4rem;
+    color: #EFF5F5;
+}
+.member #member-up{
+    color: #82CD47;
+    text-decoration: none;
+}
+.member #member-up:hover{
+    color: aqua;
+    cursor: pointer;
+}
+.member #member-in{
+    color: #F49D1A;
+    text-decoration: none;
+}
+.member #member-in:hover{
+    color: aqua;
+    cursor: pointer;
+}
+#alert-w{
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+

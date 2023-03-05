@@ -1,0 +1,42 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="wrapper" *ngIf="isLoginMode">
+        <h1>Sign In</h1>
+        <div class="alert alert-danger" id="alert-w" *ngIf="error">
+            <p>{{error}}</p>
+        </div>
+        <div *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+            <input type="text" placeholder="Email"  ngModel name="email" required email>
+            <input type="password" placeholder="Password"  ngModel name="password" required minlength="6">
+            <button id="signin-btn" [disabled]="!authForm.valid" >Sign In</button>
+        </form>
+        <div class="member">
+            Not a member ? <a id="member-in" (click)="onSwitchMode()" >Register Here</a>
+        </div>
+    </div>
+    <div class="wrapper" *ngIf="!isLoginMode">
+        <h1>Sign Up</h1>
+        <div class="alert alert-danger" id="alert-w" *ngIf="error">
+            <p>{{error}}</p>
+        </div>
+        <div *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+            <input type="text" placeholder="Username" ngModel name="username" maxlength="15">
+            <input type="text" placeholder="Email"  ngModel name="email" required email>
+            <input type="password" placeholder="Password"  ngModel name="password" required minlength="6">
+            <button id="signup-btn"  [disabled]="!authForm.valid" >Sign Up</button>
+        </form>
+        
+        <div class="member">
+            Already a member? <a  id="member-up" (click)="onSwitchMode()">Login Here</a>
+        </div>
+    </div>
+</body>

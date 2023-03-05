@@ -1,0 +1,19 @@
+
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i><fa-icon [icon]="faBars"></fa-icon></i>
+        </label>
+        <img class="logo" src="https://i.ibb.co/HtJ9DyL/CODEHEXlogo.png" alt="CodeHex Logo" routerLink="home">
+        <ul>
+            <form>
+                <li><a routerLink="auth" routerLinkActive="active" id="login-btn" *ngIf="!isAuthenticated">Sign In</a></li>
+                <li><a routerLink="home" routerLinkActive="active">Home</a></li>
+                <li><a routerLink="problemset" routerLinkActive="active">ProblemSet</a></li>
+                <li><a routerLink="scoreboard" routerLinkActive="active" *ngIf="isAuthenticated">ScoarBoard</a></li>
+                <li><a id="logout-btn" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a></li>
+            </form>
+        </ul>
+    </nav>
+</body>
