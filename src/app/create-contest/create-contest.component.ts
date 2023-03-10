@@ -43,8 +43,19 @@ export class CreateContestComponent{
     this.noProblems=this.noProblems-1;
   }
 
-  createContest(){
+  createContest(form: NgForm){
+    const contestName = form.value.contestName;
 
+    form.value.problemName.forEach(function (x: any) {
+      console.log(x);
+    });
+    
+    const problemDiff = form.value.problemDiff;
+
+    console.log(contestName);
+    console.log(problemDiff);
+
+    
   }
 
   OnSubmit(){

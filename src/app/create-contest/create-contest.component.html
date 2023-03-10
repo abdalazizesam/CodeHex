@@ -1,8 +1,8 @@
-<form id="mainForm" [formGroup]="contestForm">
+<form id="mainForm" #mainForm="ngForm" (ngSubmit)="createContest(mainForm)" >
 
 <mat-form-field appearance="outline" id="contestForm">
   <mat-label>Contest Name</mat-label>
-  <input  matInput type="name" placeholder="Ex. CodeHex Contest" required>
+  <input ngModel name="contestName"  matInput type="name" placeholder="Ex. CodeHex Contest" required>
 </mat-form-field>
 
 <div id="problemForm">
@@ -10,12 +10,12 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Problem Name</mat-label>
-    <input matInput type="name" placeholder="Ex. Watermelon" required>
+    <input ngModel name="problemName[]" matInput type="name" placeholder="Ex. Watermelon" required>
   </mat-form-field>
 
   <mat-form-field appearance="outline" color="accent">
     <mat-label>Difficulty</mat-label>
-    <mat-select required>
+    <mat-select ngModel name="problemDiff[]" required>
       <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
         {{dif.viewValue}}
       </mat-option>
@@ -24,8 +24,8 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Limits</mat-label>
-    <input  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
-  </mat-form-field>
+    <input ngModel name="problemDiff[]"  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
+  </mat-form-field> 
   <div  id="uploadLabel">
   <mat-icon fontIcon="upload"></mat-icon>
   <input id="uploadProblem" type="file">
@@ -38,12 +38,12 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Problem Name</mat-label>
-    <input matInput type="name" placeholder="Ex. Watermelon" required>
+    <input ngModel name="problemName[]" matInput type="name" placeholder="Ex. Watermelon" required>
   </mat-form-field>
 
   <mat-form-field appearance="outline" color="accent">
     <mat-label>Difficulty</mat-label>
-    <mat-select required>
+    <mat-select ngModel name="problemDiff[]" required>
       <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
         {{dif.viewValue}}
       </mat-option>
@@ -52,11 +52,13 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Limits</mat-label>
-    <input  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
-  </mat-form-field>
+    <input ngModel name="problemDiff[]"  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
+  </mat-form-field> 
+  <div  id="uploadLabel">
   <mat-icon fontIcon="upload"></mat-icon>
   <input id="uploadProblem" type="file">
   <label for="uploadProblem" >Upload File</label>
+  </div>
 </div>
 
 <div class="container" id="problemForm" *ngIf="noProblems>=3">
@@ -64,12 +66,12 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Problem Name</mat-label>
-    <input matInput type="name" placeholder="Ex. Watermelon" required>
+    <input ngModel name="problemName[]" matInput type="name" placeholder="Ex. Watermelon" required>
   </mat-form-field>
 
   <mat-form-field appearance="outline" color="accent">
     <mat-label>Difficulty</mat-label>
-    <mat-select required>
+    <mat-select ngModel name="problemDiff[]" required>
       <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
         {{dif.viewValue}}
       </mat-option>
@@ -78,11 +80,13 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Limits</mat-label>
-    <input  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
-  </mat-form-field>
+    <input ngModel name="problemDiff[]"  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
+  </mat-form-field> 
+  <div  id="uploadLabel">
   <mat-icon fontIcon="upload"></mat-icon>
   <input id="uploadProblem" type="file">
   <label for="uploadProblem" >Upload File</label>
+  </div>
 </div>
 
 <div class="container" id="problemForm" *ngIf="noProblems>=4">
@@ -90,12 +94,12 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Problem Name</mat-label>
-    <input matInput type="name" placeholder="Ex. Watermelon" required>
+    <input ngModel name="problemName[]" matInput type="name" placeholder="Ex. Watermelon" required>
   </mat-form-field>
 
   <mat-form-field appearance="outline" color="accent">
     <mat-label>Difficulty</mat-label>
-    <mat-select required>
+    <mat-select ngModel name="problemDiff[]" required>
       <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
         {{dif.viewValue}}
       </mat-option>
@@ -104,11 +108,13 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Limits</mat-label>
-    <input  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
-  </mat-form-field>
+    <input ngModel name="problemDiff[]"  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
+  </mat-form-field> 
+  <div  id="uploadLabel">
   <mat-icon fontIcon="upload"></mat-icon>
   <input id="uploadProblem" type="file">
   <label for="uploadProblem" >Upload File</label>
+  </div>
 </div>
 
 <div class="container" id="problemForm" *ngIf="noProblems>=5">
@@ -116,12 +122,12 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Problem Name</mat-label>
-    <input matInput type="name" placeholder="Ex. Watermelon" required>
+    <input ngModel name="problemName[]" matInput type="name" placeholder="Ex. Watermelon" required>
   </mat-form-field>
 
   <mat-form-field appearance="outline" color="accent">
     <mat-label>Difficulty</mat-label>
-    <mat-select required>
+    <mat-select ngModel name="problemDiff[]" required>
       <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
         {{dif.viewValue}}
       </mat-option>
@@ -130,34 +136,46 @@
 
   <mat-form-field appearance="outline" id="problemField" color="accent">
     <mat-label>Limits</mat-label>
-    <input  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
-  </mat-form-field>
+    <input ngModel name="problemDiff[]"  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
+  </mat-form-field> 
+  <div  id="uploadLabel">
   <mat-icon fontIcon="upload"></mat-icon>
   <input id="uploadProblem" type="file">
   <label for="uploadProblem" >Upload File</label>
+  </div>
 </div>
 
   <div id="problemForm" class="container" *ngIf="noProblems>=6">
     <label>Problem 6</label>
 
-  <mat-form-field appearance="outline" id="problemField" color="accent">
-    <mat-label>Problem Name</mat-label>
-    <input matInput type="name" placeholder="Ex. Watermelon" required>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" color="accent">
-    <mat-label>Difficulty</mat-label>
-    <mat-select required>
-      <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
-        {{dif.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field appearance="outline" id="problemField" color="accent">
+      <mat-label>Problem Name</mat-label>
+      <input ngModel name="problemName[]" matInput type="name" placeholder="Ex. Watermelon" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Difficulty</mat-label>
+      <mat-select ngModel name="problemDiff[]" required>
+        <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
+          {{dif.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" id="problemField" color="accent">
+      <mat-label>Limits</mat-label>
+      <input ngModel name="problemDiff[]"  matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
+    </mat-form-field> 
+    <div  id="uploadLabel">
+    <mat-icon fontIcon="upload"></mat-icon>
+    <input id="uploadProblem" type="file">
+    <label for="uploadProblem" >Upload File</label>
+    </div>
   </div>
 
   <button id="newProblem" mat-raised-button color="warn" (click)="removeProblems()" *ngIf="noProblems>1">Remove Last Problem</button>
-  <button id="newProblem" mat-raised-button color="primary" (click)="addProblems()" *ngIf="noProblems<20">Add New Problem</button>
+  <button id="newProblem" mat-raised-button color="primary" (click)="addProblems()" *ngIf="noProblems<6">Add New Problem</button>
 
 
-  <button id="create" mat-raised-button color="accent" (click)="OnSubmit()">Create Contest</button>
+  <button id="create" mat-raised-button color="accent" (click)="createContest(mainForm)">Create Contest</button>
 </form>
