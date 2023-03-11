@@ -50,7 +50,7 @@ addProblems(){
   }
 
   createContest(form: NgForm){
-    console.log(this.problems)
+    console.log(this.problems.value)
   }
 
   OnSubmit(){
