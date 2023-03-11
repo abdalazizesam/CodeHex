@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { ContestService } from '../contest.service';
-import { FormBuilder, FormGroup, NgForm, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } from '@angular/forms';
 
 interface Difficulty {
   value: string;
@@ -19,10 +19,8 @@ type ContestObj= {
 })
 export class CreateContestComponent{
   constructor(private formBuilder: FormBuilder){}
-  contestForm = new FormGroup({
-    
-  })
-  
+
+  problems: any = new FormArray([]);
   
   difficulty: Difficulty[] = [
     {value: 'easy-1', viewValue: 'Easy'},
@@ -33,29 +31,26 @@ export class CreateContestComponent{
 
 }
 
-  noProblems: number = 1;
+addProblems(){
 
-  addProblems(){
-    this.noProblems=this.noProblems+1;
-    console.log(this.noProblems);
+    const _problem = new FormGroup({
+      problemName: new FormControl(''),
+      problemDiff: new FormControl(''),
+      problemLimits: new FormControl(''),
+      problemStatement: new FormControl('')
+    });
+
+    this.problems.push(_problem);
   }
+
+
+
   removeProblems(){
-    this.noProblems=this.noProblems-1;
+    this.problems.removeAt(this.problems.length - 1)
   }
 
   createContest(form: NgForm){
-    const contestName = form.value.contestName;
-
-    form.value.problemName.forEach(function (x: any) {
-      console.log(x);
-    });
-    
-    const problemDiff = form.value.problemDiff;
-
-    console.log(contestName);
-    console.log(problemDiff);
-
-    
+    console.log(this.problems)
   }
 
   OnSubmit(){
