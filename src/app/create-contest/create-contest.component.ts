@@ -1,16 +1,18 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { ContestService } from '../contest.service';
 import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } from '@angular/forms';
+import { ApiService } from '../services/api.service';
+import { MatDialogRef } from '@angular/material/dialog'
+import { DialogRef } from '@angular/cdk/dialog';
 
 interface Difficulty {
   value: string;
   viewValue: string;
 }
 
-type ContestObj= {
-  name: string;
-  job: number;
-};
+interface Contest{
+  [key: string]: [];
+}
 
 @Component({
   selector: 'app-creat-contest',
@@ -18,7 +20,7 @@ type ContestObj= {
   styleUrls: ['./create-contest.component.css']
 })
 export class CreateContestComponent{
-  constructor(private formBuilder: FormBuilder){}
+  constructor(private formBuilder: FormBuilder, private api : ApiService, private dialogRef: MatDialogRef<any> ){}
 
   problems: any = new FormArray([]);
   
@@ -34,6 +36,7 @@ export class CreateContestComponent{
 addProblems(){
 
     const _problem = new FormGroup({
+      contestName: new FormControl(''),
       problemName: new FormControl(''),
       problemDiff: new FormControl(''),
       problemLimits: new FormControl(''),
@@ -46,11 +49,24 @@ addProblems(){
 
 
   removeProblems(){
-    this.problems.removeAt(this.problems.length - 1)
+
   }
 
+
   createContest(form: NgForm){
-    console.log(this.problems.value)
+    let Contest: Contest = {}
+    Contest[form.value.contestName] = this.problems.value
+    console.log(form.value.contestName)
+    this.api.postContest(Contest).subscribe({
+      next:(res)=>{
+        alert("Contest Created")
+        this.problems.reset();
+        this.dialogRef.close();
+      },
+      error:()=>{
+        alert("error while creating contest")
+      }
+    })
   }
 
   OnSubmit(){
