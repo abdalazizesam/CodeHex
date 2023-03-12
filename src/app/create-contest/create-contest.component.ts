@@ -13,10 +13,10 @@ interface Difficulty {
 }
 
 interface Contest{
-  contest_name: string;
-  start_data: Date;
-  end_date: Date;
-  problems: [];
+  ContestName: string;
+  StartDate: Date;
+  EndDate: Date;
+  Problems: [];
 }
 
 @Component({
@@ -61,10 +61,10 @@ addProblems(){
 
     let Contest: Contest = 
     {
-      contest_name: form.value.contestName,
-      start_data: form.value.startTime,
-      end_date: form.value.endTime,
-      problems: this.problems.value
+      ContestName: form.value.contestName,
+      StartDate: form.value.startTime,
+      EndDate: form.value.endTime,
+      Problems: this.problems.value
     }
 
     this.api.postContest(Contest).subscribe({
