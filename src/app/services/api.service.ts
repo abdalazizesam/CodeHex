@@ -13,13 +13,13 @@ export class ApiService {
     return this.http.post<any>("http://localhost:3000/contestList", data);
   }
   postProblems(data: any){
-    return this.http.post<any>("http://localhost:3000/problemsList", data);
+    return this.http.post<any>("http://localhost:3000/problemList", data);
   }
 
   getContest(){
     return this.http.get<any>("http://localhost:3000/contestList");
   }
   getProblems(){
-    return this.http.get<any>("http://localhost:3000/problemsList");
+    return this.http.get<any>("http://localhost:3000/problemList");
   }
 }
