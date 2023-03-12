@@ -25,6 +25,7 @@ export class CreateContestComponent{
   constructor(private formBuilder: FormBuilder, private api : ApiService, private dialogRef: MatDialogRef<any> ){}
 
   problems: any = new FormArray([]);
+  contests: any = new FormArray([]);
   
   difficulty: Difficulty[] = [
     {value: 'easy-1', viewValue: 'Easy'},
@@ -55,10 +56,17 @@ addProblems(){
 
 
   createContest(form: NgForm){
+    let Contests:any [] =
+      [
+        
+
+
+      ]
+    
     let Contest: Contest = {}
     Contest[form.value.contestName] = this.problems.value
     console.log(form.value.startTime)
-    console.log(form.value.end)
+    console.log(form.value.endTime)
     this.api.postContest(Contest).subscribe({
       next:(res)=>{
         alert("Contest Created")
