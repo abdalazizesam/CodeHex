@@ -20,6 +20,11 @@ import { AdminProblemsetComponent } from './admin-problemset/admin-problemset.co
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
+
 
 
 
@@ -52,7 +57,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     MatRadioModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,  
   ],
   providers: [],
   bootstrap: [AppComponent]

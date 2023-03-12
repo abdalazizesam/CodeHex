@@ -1,54 +1,15 @@
 {
   "contestList": [
     {
-      "CodeHex": [
+      "": [
         {
-          "contestName": "",
-          "problemName": "svdvd",
-          "problemDiff": "easy-1",
-          "problemLimits": "vdvdv",
-          "problemStatement": ""
-        },
-        {
-          "contestName": "",
-          "problemName": "vdvd",
-          "problemDiff": "medium-2",
-          "problemLimits": "vdvdvd",
+          "problemName": "",
+          "problemDiff": "",
+          "problemLimits": "",
           "problemStatement": ""
         }
       ],
       "id": 1
-    },
-    {
-      "cscsc": [
-        {
-          "contestName": "",
-          "problemName": "cscs",
-          "problemDiff": "easy-1",
-          "problemLimits": "cscs",
-          "problemStatement": "C:\\fakepath\\369.jpg"
-        },
-        {
-          "contestName": "",
-          "problemName": "scs",
-          "problemDiff": "easy-1",
-          "problemLimits": "cscs",
-          "problemStatement": ""
-        }
-      ],
-      "id": 2
-    },
-    {
-      " c dvdvd": [
-        {
-          "contestName": "",
-          "problemName": "vdsv",
-          "problemDiff": "hard-3",
-          "problemLimits": "vsvds",
-          "problemStatement": "C:\\fakepath\\368.jpg"
-        }
-      ],
-      "id": 3
     }
   ],
   "comments": [

@@ -5,6 +5,8 @@ import { ApiService } from '../services/api.service';
 import { MatDialogRef } from '@angular/material/dialog'
 import { DialogRef } from '@angular/cdk/dialog';
 
+
+
 interface Difficulty {
   value: string;
   viewValue: string;
@@ -36,7 +38,6 @@ export class CreateContestComponent{
 addProblems(){
 
     const _problem = new FormGroup({
-      contestName: new FormControl(''),
       problemName: new FormControl(''),
       problemDiff: new FormControl(''),
       problemLimits: new FormControl(''),
@@ -56,7 +57,8 @@ addProblems(){
   createContest(form: NgForm){
     let Contest: Contest = {}
     Contest[form.value.contestName] = this.problems.value
-    console.log(form.value.contestName)
+    console.log(form.value.startTime)
+    console.log(form.value.end)
     this.api.postContest(Contest).subscribe({
       next:(res)=>{
         alert("Contest Created")

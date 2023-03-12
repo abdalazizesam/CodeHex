@@ -8,7 +8,7 @@
 body{
     min-width: 100%;
     display: grid;
-    place-items: center;
+    place-items: initial;
     background-color: #EFF5F5;
 }
 body *{
