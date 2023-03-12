@@ -12,8 +12,14 @@ export class ApiService {
   postContest(data: any){
     return this.http.post<any>("http://localhost:3000/contestList", data);
   }
+  postProblems(data: any){
+    return this.http.post<any>("http://localhost:3000/problemsList", data);
+  }
 
   getContest(){
     return this.http.get<any>("http://localhost:3000/contestList");
+  }
+  getProblems(){
+    return this.http.get<any>("http://localhost:3000/problemsList");
   }
 }

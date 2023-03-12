@@ -1,117 +1,56 @@
 
 <body>
-    <main>
         <h1 id="codehex-title">CodeHex Problems</h1>
-        <section>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 1</h2>
-                </div>
-                <h3 id="limitsc">Limits: 5 seconds / 512 MB</h3>
-                <h1>Difficulty : Easy</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 2</h2>
-                </div>
-                <h3 id="limitsc">Limits: 2 seconds / 512 MB</h3>
-                <h1>Difficulty : Medium</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 3</h2>
-                </div>
-                <h3 id="limitsc">Limits: 2 seconds / 512 MB</h3>
-                <h1>Difficulty : Easy</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 4</h2>
-                </div>
-                <h3 id="limitsc">Limits: 1 seconds / 1024 MB</h3>
-                <h1>Difficulty : Hard</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 5</h2>
-                </div>
-                <h3 id="limitsc">Limits: 5 seconds / 512 MB</h3>
-                <h1>Difficulty : Medium</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 6</h2>
-                </div>
-                <h3 id="limitsc">Limits: 5 seconds / 512 MB</h3>
-                <h1>Difficulty : Easy</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 7</h2>
-                </div>
-                <h3 id="limitsc">Limits: 1 seconds / 1024 MB</h3>
-                <h1>Difficulty : Hard</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 8</h2>
-                </div>
-                <h3 id="limitsc">Limits: 5 seconds / 512 MB</h3>
-                <h1>Difficulty : Hard</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 9</h2>
-                </div>
-                <h3 id="limitsc">Limits: 5 seconds / 512 MB</h3>
-                <h1>Difficulty : Easy</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 10</h2>
-                </div>
-                <h3 id="limitsc">Limits: 2 seconds / 512 MB</h3>
-                <h1>Difficulty : Medium</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 11</h2>
-                </div>
-                <h3 id="limitsc">Limits: 5 seconds / 512 MB</h3>
-                <h1>Difficulty : Easy</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
-            <article>
-                <div class="problemname">
-                    <h2>Problem 12</h2>
-                </div>
-                <h3 id="limitsc">Limits: 1 seconds / 1024 MB</h3>
-                <h1>Difficulty : Hard</h1>
-                <button type="button" class="btn btn-info" id="view-btn">View</button>
-                <button type="button" class="btn btn-success" id="submit-btn">Submit</button>
-            </article>
+        
+        <div id="contestTable">
+            <mat-form-field appearance="outline">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+              </mat-form-field>
+              
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
+              
+                  <!-- ContestName Column -->
+                  <ng-container matColumnDef="problemName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Problem Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.problemName}} </td>
+                  </ng-container>
+              
+                  <!-- StartDate Column -->
+                  <ng-container matColumnDef="problemDiff">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty </th>
+                    <td mat-cell *matCellDef="let row"> {{row.problemDiff}} </td>
+                  </ng-container>
+              
+                  <!-- EndDate Column -->
+                  <ng-container matColumnDef="problemLimits">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Limits </th>
+                    <td mat-cell *matCellDef="let row"> {{row.problemLimits}} </td>
+                  </ng-container>
 
-        </section>
-    </main>
+                   <!-- Functions Column -->
+                   <ng-container matColumnDef="problemStatement">
+                    <th mat-header-cell *matHeaderCellDef> problem Statement</th>
+                    <td mat-cell *matCellDef="let row">
+                         <button id="funbtn" mat-stroked-button color="primary">View</button>
+                          </td>
+                  </ng-container>
+              
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              </div>
+              
+              
+        </div>
+
 </body>

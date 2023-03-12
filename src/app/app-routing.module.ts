@@ -6,9 +6,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AdminProblemsetComponent } from './admin-problemset/admin-problemset.component';
 
 const routes: Routes = [
-  { path: 'problemset', component:AdminProblemsetComponent},
+  { path: 'problemset', component:ProblemsetComponent},
   {path: 'auth', component:AuthComponent},
-  {path: 'home', component:HomepageComponent}
+  {path: 'home', component:HomepageComponent},
+  {path: 'createcontenst', component:AdminProblemsetComponent}
 ];
 
 @NgModule({

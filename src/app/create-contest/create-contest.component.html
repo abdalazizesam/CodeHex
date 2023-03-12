@@ -1,5 +1,5 @@
 <form id="mainForm" #mainForm="ngForm" (ngSubmit)="createContest(mainForm)" >
-<div id="contestDiv">
+<div id="contestDiv" *ngIf="!contestCreated"> 
 
 <mat-form-field appearance="outline" id="contestForm">
   <mat-label>Contest Name</mat-label>
@@ -51,10 +51,12 @@
     
 </div>
 
-<button type="button" id="newProblem" mat-raised-button color="warn" (click)="removeProblems()" >Remove Last Problem</button>
-<button type="button" id="newProblem" mat-raised-button color="primary" (click)="addProblems()">Add New Problem</button>
+<button *ngIf="contestCreated" type="button" id="newProblem" mat-raised-button color="warn" (click)="removeProblems()" >Remove Last Problem</button>
+<button *ngIf="contestCreated" type="button" id="newProblem" mat-raised-button color="primary" (click)="addProblems()">Add New Problem</button>
+<button *ngIf="contestCreated" type="button" id="newProblem" mat-raised-button color="accent" (click)="finishContest()">Finish Contest</button>
 
-<button type="submit" id="newProblem" mat-raised-button color="accent">Create Contest</button>
+
+<button *ngIf="!contestCreated" type="submit" id="newProblem" mat-raised-button color="accent" (click)="addProblems()">Create Contest</button>
   
 
 </form>

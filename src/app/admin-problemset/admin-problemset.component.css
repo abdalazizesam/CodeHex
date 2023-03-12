@@ -76,5 +76,12 @@ article button{
     background-color: #989696;
     color: #FFFFFF;
 }
+#contestTable{
+    margin-top: 20px;
+    padding: 20px;
+}
+#funbtn{
+    margin-left: 10px;
+}
 
 

@@ -13,7 +13,9 @@ interface Difficulty {
 }
 
 interface Contest{
-  [key: string]: [];
+  ContestName: string;
+  StartDate: Date;
+  EndDate: Date;
 }
 
 @Component({
@@ -24,8 +26,9 @@ interface Contest{
 export class CreateContestComponent{
   constructor(private formBuilder: FormBuilder, private api : ApiService, private dialogRef: MatDialogRef<any> ){}
 
+  contestCreated: boolean = false;
+
   problems: any = new FormArray([]);
-  contests: any = new FormArray([]);
   
   difficulty: Difficulty[] = [
     {value: 'easy-1', viewValue: 'Easy'},
@@ -38,7 +41,7 @@ export class CreateContestComponent{
 
 addProblems(){
 
-    const _problem = new FormGroup({
+    let _problem = new FormGroup({
       problemName: new FormControl(''),
       problemDiff: new FormControl(''),
       problemLimits: new FormControl(''),
@@ -56,19 +59,30 @@ addProblems(){
 
 
   createContest(form: NgForm){
-    let Contests:any [] =
-      [
-        
 
+    let Contest: Contest = 
+    {
+      ContestName: form.value.contestName,
+      StartDate: form.value.startTime,
+      EndDate: form.value.endTime,
+    }
 
-      ]
-    
-    let Contest: Contest = {}
-    Contest[form.value.contestName] = this.problems.value
-    console.log(form.value.startTime)
-    console.log(form.value.endTime)
     this.api.postContest(Contest).subscribe({
-      next:(res)=>{
+      next:()=>{
+        this.contestCreated = true;
+        alert("Contest Created")
+        this.problems.reset();
+      },
+      error:()=>{
+        alert("error while creating contest")
+      }
+    })
+  }
+
+  finishContest(){
+    this.api.postProblems(this.problems.value).subscribe({
+      next:()=>{
+        this.contestCreated = true;
         alert("Contest Created")
         this.problems.reset();
         this.dialogRef.close();
