@@ -1,25 +1,25 @@
 {
   "contestList": [
     {
-      "": [
+      "contest_name": "Sheet #1",
+      "start_data": "2023-12-12T14:22",
+      "end_date": "2222-02-22T14:22",
+      "problems": [
         {
-          "problemName": "",
-          "problemDiff": "",
-          "problemLimits": "",
+          "problemName": "asdasd",
+          "problemDiff": "medium-2",
+          "problemLimits": "1",
+          "problemStatement": ""
+        },
+        {
+          "problemName": "asdsad",
+          "problemDiff": "easy-1",
+          "problemLimits": "1",
           "problemStatement": ""
         }
       ],
-      "id": 1
+      "id": 2
     }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
+  
 }

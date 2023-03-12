@@ -13,7 +13,10 @@ interface Difficulty {
 }
 
 interface Contest{
-  [key: string]: [];
+  contest_name: string;
+  start_data: Date;
+  end_date: Date;
+  problems: [];
 }
 
 @Component({
@@ -55,12 +58,17 @@ addProblems(){
 
 
   createContest(form: NgForm){
-    let Contest: Contest = {}
-    Contest[form.value.contestName] = this.problems.value
-    console.log(form.value.startTime)
-    console.log(form.value.end)
+
+    let Contest: Contest = 
+    {
+      contest_name: form.value.contestName,
+      start_data: form.value.startTime,
+      end_date: form.value.endTime,
+      problems: this.problems.value
+    }
+
     this.api.postContest(Contest).subscribe({
-      next:(res)=>{
+      next:()=>{
         alert("Contest Created")
         this.problems.reset();
         this.dialogRef.close();
