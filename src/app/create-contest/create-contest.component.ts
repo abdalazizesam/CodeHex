@@ -1,9 +1,10 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Inject} from '@angular/core';
 import { ContestService } from '../contest.service';
 import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-import { MatDialogRef } from '@angular/material/dialog'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { DialogRef } from '@angular/cdk/dialog';
+
 
 
 
@@ -24,7 +25,10 @@ interface Contest{
   styleUrls: ['./create-contest.component.css']
 })
 export class CreateContestComponent{
-  constructor(private formBuilder: FormBuilder, private api : ApiService, private dialogRef: MatDialogRef<any> ){}
+  constructor(private formBuilder: FormBuilder,
+    private api : ApiService,
+    @Inject(MAT_DIALOG_DATA) public editData: any,
+    private dialogRef: MatDialogRef<any> ){}
 
   contestCreated: boolean = false;
 
@@ -35,11 +39,25 @@ export class CreateContestComponent{
     {value: 'medium-2', viewValue: 'Medium'},
     {value: 'hard-3', viewValue: 'Hard'},
   ];
+  
   OnInit(): void{
+    console.log(this.editData)
+}
+ngOnInit(form: NgForm): void {
+  console.log(this.editData)
+}
 
+
+
+
+getfile(event: any){ 
+  this.file = event.target.files[0];
+  console.log("file", this.file)
 }
 
 addProblems(){
+  let formData = new FormData();
+  formData.set("file", this.file);
 
     let _problem = new FormGroup({
       problemName: new FormControl(''),
@@ -58,7 +76,7 @@ addProblems(){
   }
 
 
-  createContest(form: NgForm){
+  createContest(form: NgForm){  
 
     let Contest: Contest = 
     {
@@ -92,6 +110,9 @@ addProblems(){
       }
     })
   }
+  file:any;
+
+ 
 
   OnSubmit(){
 

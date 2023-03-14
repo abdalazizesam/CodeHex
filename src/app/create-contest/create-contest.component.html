@@ -44,8 +44,9 @@
     </mat-form-field> 
     <div  id="uploadLabel">
     <mat-icon fontIcon="upload"></mat-icon>
-    <input formControlName="problemStatement" id="uploadProblem" type="file">
-    <label for="uploadProblem" >Upload File</label>
+    <label> Problem </label>
+    <input formControlName="problemStatement" id="uploadProblem" type="file" (change)="getfile($event)">
+    <label for="uploadProblem" > File Upload</label>
     </div>
   </ng-container>
     
@@ -57,6 +58,4 @@
 
 
 <button *ngIf="!contestCreated" type="submit" id="newProblem" mat-raised-button color="accent" (click)="addProblems()">Create Contest</button>
-  
-
 </form>
