@@ -28,19 +28,15 @@
       <mat-label>Problem Name</mat-label>
       <input matInput formControlName="problemName" type="name" placeholder="Ex. Watermelon" required>
     </mat-form-field>
-  
-    <mat-form-field appearance="outline" color="accent">
-      <mat-label>Difficulty</mat-label>
-      <mat-select  formControlName="problemDiff" required>
-        <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
-          {{dif.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+
+    <mat-form-field appearance="outline" id="problemField" color="accent">
+      <mat-label>Time Limit</mat-label>
+      <input  formControlName="timeLimit" matInput type="number" placeholder="Ex. Limit: 1 seconds" required>
+    </mat-form-field> 
   
     <mat-form-field appearance="outline" id="problemField" color="accent">
-      <mat-label>Limits</mat-label>
-      <input  formControlName="problemLimits" matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
+      <mat-label>Memory Limit</mat-label>
+      <input  formControlName="memoryLimit" matInput type="number" placeholder="Ex. Limit: 1024 MB"  required>
     </mat-form-field> 
     <div  id="uploadLabel">
     <mat-icon fontIcon="upload"></mat-icon>

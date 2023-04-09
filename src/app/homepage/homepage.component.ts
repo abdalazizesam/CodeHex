@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ApiService } from '../services/api.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  constructor(private matDialog: MatDialog,private api: ApiService){}
+  constructor(private matDialog: MatDialog,private api: ApiService,private authService: AuthService){}
   displayedColumns: string[] = ['ContestName','StartDate', 'EndDate'];
   dataSource!: MatTableDataSource<any>;
 
@@ -34,9 +35,12 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.getAllContests())
+    this.authService.autoLogin();
+    this.getAllContests();
+
   }
 
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

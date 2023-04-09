@@ -4,14 +4,12 @@ import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } fr
 import { ApiService } from '../services/api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { DialogRef } from '@angular/cdk/dialog';
+import { AuthService } from '../auth/auth.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
-
-
-interface Difficulty {
-  value: string;
-  viewValue: string;
-}
 
 interface Contest{
   ContestName: string;
@@ -26,27 +24,43 @@ interface Contest{
 })
 export class CreateContestComponent{
   constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
     private api : ApiService,
     @Inject(MAT_DIALOG_DATA) public editData: any,
     private dialogRef: MatDialogRef<any> ){}
+
+    dataSource!: MatTableDataSource<any>;
+
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
   contestCreated: boolean = false;
 
   problems: any = new FormArray([]);
   
-  difficulty: Difficulty[] = [
-    {value: 'easy-1', viewValue: 'Easy'},
-    {value: 'medium-2', viewValue: 'Medium'},
-    {value: 'hard-3', viewValue: 'Hard'},
-  ];
-  
+
   OnInit(): void{
     console.log(this.editData)
 }
-ngOnInit(form: NgForm): void {
-  console.log(this.editData)
+ngOnInit(): void {
+  this.authService.autoLogin();
+  this.getAllContests();
 }
 
+
+getAllContests(){
+  this.api.getContest().subscribe({
+    next:(res)=>{
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    },
+    error:(err)=>{
+      alert("Error while fetching the records!!")
+
+    }
+  })
+}
 
 
 
@@ -61,8 +75,8 @@ addProblems(){
 
     let _problem = new FormGroup({
       problemName: new FormControl(''),
-      problemDiff: new FormControl(''),
-      problemLimits: new FormControl(''),
+      timeLimit: new FormControl(''),
+      memoryLimit: new FormControl(''),
       problemStatement: new FormControl('')
     });
 

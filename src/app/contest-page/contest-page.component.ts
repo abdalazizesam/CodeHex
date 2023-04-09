@@ -3,6 +3,7 @@ import { ContestService } from '../contest.service';
 import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import { DialogRef } from '@angular/cdk/dialog';
+import { AuthService } from '../auth/auth.service';
 
 export interface PeriodicElement {
   name: string;
@@ -26,13 +27,18 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './contest-page.component.html',
   styleUrls: ['./contest-page.component.css']
 })
-export class ContestPageComponent {
+export class ContestPageComponent implements OnInit {
 
   displayedColumns: string[] = ['no-problem', 'name-problem', 'time-limit', 'memory-limit','functions'];
   dataSource = ELEMENT_DATA;
 
   constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
     private api : ApiService){}
+
+    ngOnInit(): void {
+      this.authService.autoLogin();
+    }
 
     viewPDF(element: any){
       data: element

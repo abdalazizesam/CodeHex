@@ -1,0 +1,23 @@
+body{
+    background-color: #EFF5F5;
+}
+table {
+    width: 100%;
+  }
+
+  div{
+    margin-top: 0 !important;
+    margin: 30px;
+    align-items: center;
+    position: relative;
+    
+  }
+  #pageTitle{
+    place-items: center;
+    display:grid;
+    padding: 20px;
+}
+#pageTitle h1{
+    font-size: 35px;
+    font-weight: bold;
+}

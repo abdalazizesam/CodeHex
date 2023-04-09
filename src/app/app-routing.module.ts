@@ -5,13 +5,15 @@ import { AuthComponent } from './auth/auth.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AdminProblemsetComponent } from './admin-problemset/admin-problemset.component';
 import { ContestPageComponent } from './contest-page/contest-page.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 const routes: Routes = [
   { path: 'problemset', component:ProblemsetComponent},
   {path: 'auth', component:AuthComponent},
   {path: 'home', component:HomepageComponent},
-  {path: 'createcontenst', component:AdminProblemsetComponent},
-  {path: 'contestpage', component:ContestPageComponent}
+  {path: 'createcontest', component:AdminProblemsetComponent},
+  {path: 'contestpage', component:ContestPageComponent},
+  {path: 'scoreboard', component:ScoreboardComponent}
 ];
 
 @NgModule({

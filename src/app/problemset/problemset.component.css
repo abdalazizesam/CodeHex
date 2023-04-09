@@ -1,7 +1,13 @@
 body{
     background-color: #EFF5F5;
 }
-#ProblemsTable{
+#codehex-title{
+  padding-left: 25px;
+  padding-top: 20px;
+  font-size: 35px;
+  font-weight:500;
+}
+#contestTable{
     position: relative;
     display: grid;
     padding: 25px;
