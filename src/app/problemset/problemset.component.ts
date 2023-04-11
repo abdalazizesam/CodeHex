@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from '../services/api.service';
 
+
 @Component({
   selector: 'app-problemset',
   templateUrl: './problemset.component.html',
@@ -11,15 +12,16 @@ import { ApiService } from '../services/api.service';
 })
 export class ProblemsetComponent implements OnInit {
   constructor(private api: ApiService){}
-  displayedColumns: string[] = ['problemName','problemDiff', 'problemLimits', 'problemStatement'];
-  dataSource!: MatTableDataSource<any>;
+  displayedColumns: string[] = ['problemName', 'timeLimit', 'memoryLimit', 'functions'];
+  dataSource = new MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  
+
   ngOnInit(): void {
-    console.log(this.getAllProblems())
-    this.getAllProblems();
+    this.getAllProblems()
   }
 
 
@@ -36,6 +38,8 @@ export class ProblemsetComponent implements OnInit {
       }
     })
   }
+
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

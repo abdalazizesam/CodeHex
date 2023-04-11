@@ -28,24 +28,21 @@
       <mat-label>Problem Name</mat-label>
       <input matInput formControlName="problemName" type="name" placeholder="Ex. Watermelon" required>
     </mat-form-field>
-  
-    <mat-form-field appearance="outline" color="accent">
-      <mat-label>Difficulty</mat-label>
-      <mat-select  formControlName="problemDiff" required>
-        <mat-option *ngFor="let dif of difficulty" [value]="dif.value">
-          {{dif.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+
+    <mat-form-field appearance="outline" id="problemField" color="accent">
+      <mat-label>Time Limit</mat-label>
+      <input  formControlName="timeLimit" matInput type="number" placeholder="Ex. Limit: 1 seconds" required>
+    </mat-form-field> 
   
     <mat-form-field appearance="outline" id="problemField" color="accent">
-      <mat-label>Limits</mat-label>
-      <input  formControlName="problemLimits" matInput type="name" placeholder="Ex. Limits: 1 seconds / 1024 MB" value="Limits:" required>
+      <mat-label>Memory Limit</mat-label>
+      <input  formControlName="memoryLimit" matInput type="number" placeholder="Ex. Limit: 1024 MB"  required>
     </mat-form-field> 
     <div  id="uploadLabel">
     <mat-icon fontIcon="upload"></mat-icon>
-    <input formControlName="problemStatement" id="uploadProblem" type="file">
-    <label for="uploadProblem" >Upload File</label>
+    <label> Problem </label>
+    <input formControlName="problemStatement" id="uploadProblem" type="file" (change)="getfile($event)">
+    <label for="uploadProblem" > File Upload</label>
     </div>
   </ng-container>
     
@@ -57,6 +54,4 @@
 
 
 <button *ngIf="!contestCreated" type="submit" id="newProblem" mat-raised-button color="accent" (click)="addProblems()">Create Contest</button>
-  
-
 </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild, NgZone } from '@angular/core';
 import { CreateContestComponent } from '../create-contest/create-contest.component';
 import { MatDialog } from '@angular/material/dialog'
 import { ContestService } from '../contest.service';
@@ -7,6 +7,9 @@ import { ApiService } from '../services/api.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+
 
 @Component({
   selector: 'app-admin-problemset',
@@ -21,15 +24,28 @@ export class AdminProblemsetComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private matDialog: MatDialog, private api: ApiService){}
+  constructor(private matDialog: MatDialog, private api: ApiService, private zone: NgZone){}
+
   ngOnInit(): void {
     this.getAllContests();
+    console.log(this.editContest);
   }
+ 
   openDialog() {
+    this.zone.run(() => {
     this.matDialog.open(CreateContestComponent,{ 
       width: '600px',
     })
+  })
   }
+
+
+editContest(row: any){
+  this.matDialog.open(CreateContestComponent,{ 
+    width: '600px',
+    data: row
+  })
+}
 
   getAllContests(){
     this.api.getContest().subscribe({
@@ -44,6 +60,7 @@ export class AdminProblemsetComponent implements OnInit {
       }
     })
   }
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

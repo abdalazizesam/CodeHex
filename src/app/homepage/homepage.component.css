@@ -1,0 +1,21 @@
+body{
+    background-color: #EFF5F5;
+    place-items: center;
+    display:block;
+}
+#headerText{
+    place-items: center;
+    display:grid;
+    padding: 20px;
+}
+#headerText h1{
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#contestTable{
+    padding: 25px;
+}
+#contestLink:hover{
+    cursor: pointer;
+}

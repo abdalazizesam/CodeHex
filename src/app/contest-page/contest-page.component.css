@@ -1,13 +1,7 @@
 body{
     background-color: #EFF5F5;
 }
-#codehex-title{
-  padding-left: 25px;
-  padding-top: 20px;
-  font-size: 35px;
-  font-weight:500;
-}
-#contestTable{
+#ProblemsTable{
     position: relative;
     display: grid;
     padding: 25px;
@@ -51,5 +45,5 @@ body{
   }
 
   #funbtn{
-    margin-left: 20px;
+    margin-left: 10px;
 }

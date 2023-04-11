@@ -3,54 +3,49 @@
         <h1 id="codehex-title">CodeHex Problems</h1>
         
         <div id="contestTable">
-            <mat-form-field appearance="outline">
-                <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-              </mat-form-field>
-              
-              <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" matSort>
-              
-                  <!-- ContestName Column -->
-                  <ng-container matColumnDef="problemName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Problem Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.problemName}} </td>
-                  </ng-container>
-              
-                  <!-- StartDate Column -->
-                  <ng-container matColumnDef="problemDiff">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty </th>
-                    <td mat-cell *matCellDef="let row"> {{row.problemDiff}} </td>
-                  </ng-container>
-              
-                  <!-- EndDate Column -->
-                  <ng-container matColumnDef="problemLimits">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Limits </th>
-                    <td mat-cell *matCellDef="let row"> {{row.problemLimits}} </td>
-                  </ng-container>
-
-                   <!-- Functions Column -->
-                   <ng-container matColumnDef="problemStatement">
-                    <th mat-header-cell *matHeaderCellDef> problem Statement</th>
-                    <td mat-cell *matCellDef="let row">
-                         <button id="funbtn" mat-stroked-button color="primary">View</button>
-                          </td>
-                  </ng-container>
-              
-              
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              
-                  <!-- Row shown when there is no matching data. -->
-                  <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                  </tr>
-                </table>
-              
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-              </div>
-              
-              
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+          </mat-form-field>
+          
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+          
+              <!-- ID Column -->
+              <ng-container matColumnDef="problemName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> problem Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.problemName}} </td>
+              </ng-container>
+          
+              <!-- Progress Column -->
+              <ng-container matColumnDef="timeLimit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Time Limit </th>
+                <td mat-cell *matCellDef="let row"> {{row.timeLimit}} sec  </td>
+              </ng-container>
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="memoryLimit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Memory Limit </th>
+                <td mat-cell *matCellDef="let row"> {{row.memoryLimit}} KB </td>
+              </ng-container>
+          
+              <!-- Fruit Column -->
+              <ng-container matColumnDef="functions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Functions </th>
+                <td mat-cell *matCellDef="let row"> {{row.functions}} </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+          </div>          
         </div>
 
 </body>

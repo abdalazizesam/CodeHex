@@ -1,16 +1,15 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Inject} from '@angular/core';
 import { ContestService } from '../contest.service';
 import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-import { MatDialogRef } from '@angular/material/dialog'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { DialogRef } from '@angular/cdk/dialog';
+import { AuthService } from '../auth/auth.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
-
-interface Difficulty {
-  value: string;
-  viewValue: string;
-}
 
 interface Contest{
   ContestName: string;
@@ -24,27 +23,64 @@ interface Contest{
   styleUrls: ['./create-contest.component.css']
 })
 export class CreateContestComponent{
-  constructor(private formBuilder: FormBuilder, private api : ApiService, private dialogRef: MatDialogRef<any> ){}
+  constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private api : ApiService,
+    @Inject(MAT_DIALOG_DATA) public editData: any,
+    private dialogRef: MatDialogRef<any> ){}
+
+    dataSource!: MatTableDataSource<any>;
+
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
   contestCreated: boolean = false;
 
   problems: any = new FormArray([]);
   
-  difficulty: Difficulty[] = [
-    {value: 'easy-1', viewValue: 'Easy'},
-    {value: 'medium-2', viewValue: 'Medium'},
-    {value: 'hard-3', viewValue: 'Hard'},
-  ];
-  OnInit(): void{
 
+  OnInit(): void{
+    console.log(this.editData)
+}
+ngOnInit(): void {
+  this.authService.autoLogin();
+  this.getAllContests();
+}
+
+
+getAllContests(){
+  this.api.getContest().subscribe({
+    next:(res)=>{
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    },
+    error:(err)=>{
+      alert("Error while fetching the records!!")
+
+    }
+  })
+}
+
+
+
+getfile(event: any){ 
+  const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const filestring = reader.result;
+        console.log(filestring);
+    };
 }
 
 addProblems(){
+  let formData = new FormData();
 
     let _problem = new FormGroup({
       problemName: new FormControl(''),
-      problemDiff: new FormControl(''),
-      problemLimits: new FormControl(''),
+      timeLimit: new FormControl(''),
+      memoryLimit: new FormControl(''),
       problemStatement: new FormControl('')
     });
 
@@ -58,7 +94,7 @@ addProblems(){
   }
 
 
-  createContest(form: NgForm){
+  createContest(form: NgForm){  
 
     let Contest: Contest = 
     {
@@ -92,6 +128,8 @@ addProblems(){
       }
     })
   }
+
+ 
 
   OnSubmit(){
 

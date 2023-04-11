@@ -25,6 +25,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { ContestPageComponent } from './contest-page/contest-page.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 
 
@@ -48,6 +50,8 @@ import {MatSortModule} from '@angular/material/sort';
     NavBarComponent,
     CreateContestComponent,
     AdminProblemsetComponent,
+    ContestPageComponent,
+    ScoreboardComponent,
   ],
   imports: [
     BrowserModule,
