@@ -65,13 +65,17 @@ getAllContests(){
 
 
 getfile(event: any){ 
-  this.file = event.target.files[0];
-  console.log("file", this.file)
+  const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const filestring = reader.result;
+        console.log(filestring);
+    };
 }
 
 addProblems(){
   let formData = new FormData();
-  formData.set("file", this.file);
 
     let _problem = new FormGroup({
       problemName: new FormControl(''),
@@ -124,7 +128,6 @@ addProblems(){
       }
     })
   }
-  file:any;
 
  
 
