@@ -12,9 +12,24 @@ import { MatSort } from '@angular/material/sort';
 
 
 interface Contest{
-  ContestName: string;
-  StartDate: Date;
-  EndDate: Date;
+  contestName: string;
+  startDate: Date;
+  endDate: Date;
+}
+
+interface Problems{
+  ProblemName: string;
+  ProblemDescription: string;
+  MemoryLimit: number;
+  ExecutionTime: number;
+}
+
+interface ContestWithProblems{
+  contestName: string;
+  startDate: Date;
+  endDate: Date;
+  Problems: Array<Problems>;
+
 }
 
 @Component({
@@ -37,7 +52,7 @@ export class CreateContestComponent{
   contestCreated: boolean = false;
 
   problems: any = new FormArray([]);
-  
+  data: any; 
 
   OnInit(): void{
     console.log(this.editData)
@@ -81,7 +96,7 @@ addProblems(){
       problemName: new FormControl(''),
       timeLimit: new FormControl(''),
       memoryLimit: new FormControl(''),
-      problemStatement: new FormControl('')
+      ProblemDescription: new FormControl('')
     });
 
     this.problems.push(_problem);
@@ -98,14 +113,16 @@ addProblems(){
 
     let Contest: Contest = 
     {
-      ContestName: form.value.contestName,
-      StartDate: form.value.startTime,
-      EndDate: form.value.endTime,
+      contestName: form.value.contestName,
+      startDate: form.value.startTime,
+      endDate: form.value.endTime,
     }
 
     this.api.postContest(Contest).subscribe({
-      next:()=>{
+      next:(data)=>{
         this.contestCreated = true;
+        this.data = data;
+        console.log(this.data);
         alert("Contest Created")
         this.problems.reset();
       },
@@ -116,7 +133,9 @@ addProblems(){
   }
 
   finishContest(){
-    this.api.postProblems(this.problems.value).subscribe({
+    let problems: Problems = this.problems.value;
+    console.log(problems);
+    this.api.postProblems(this.data['id'], problems).subscribe({
       next:()=>{
         this.contestCreated = true;
         alert("Contest Created")
