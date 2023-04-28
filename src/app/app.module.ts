@@ -28,18 +28,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { ContestPageComponent } from './contest-page/contest-page.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
-
-
-
-
-
-
-
-
-
-
-
-
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 @NgModule({
   declarations: [
@@ -54,6 +43,7 @@ import { SubmitPageComponent } from './submit-page/submit-page.component';
     ContestPageComponent,
     ScoreboardComponent,
     SubmitPageComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -75,8 +65,19 @@ import { SubmitPageComponent } from './submit-page/submit-page.component';
     MatTableModule, 
     MatPaginatorModule,
     MatSortModule,
+    HighlightModule
+    
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HIGHLIGHT_OPTIONS,
+      useValue:{
+        fullLibraryLoader: () => import('highlight.js'),
+        themePath: 'assets/styles/solarized-dark.css',
+        
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,8 +16,11 @@ export class ApiService {
     return this.http.post<any>("https://localhost:7078/api/contest", data, {headers});
   }
   postProblems(id:number, data: any){
+    console.log(data);
     let headers = new HttpHeaders()
-    .set("Access-Control-Allow-Origin", "*");
+    .set("Access-Control-Allow-Origin", "*")
+    .set('Content-Type', 'multipart/form-data');
+
     return this.http.post<any>(`https://localhost:7078/api/Problem/Problems?contestId=${id}`, data, {headers});
   }
 

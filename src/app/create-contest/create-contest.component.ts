@@ -19,7 +19,7 @@ interface Contest{
 
 interface Problems{
   ProblemName: string;
-  ProblemDescription: string;
+  ProblemDescription: File;
   MemoryLimit: number;
   ExecutionTime: number;
 }
@@ -53,7 +53,9 @@ export class CreateContestComponent{
 
   problems: any = new FormArray([]);
   data: any; 
-
+  files: Array<File> = new Array<File>;
+  formdata: Array<FormData> = new Array<FormData>;
+  
   OnInit(): void{
     console.log(this.editData)
 }
@@ -81,21 +83,15 @@ getAllContests(){
 
 getfile(event: any){ 
   const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      const filestring = reader.result;
-        console.log(filestring);
-    };
+  this.files.push(file);
+  
 }
 
 addProblems(){
-  let formData = new FormData();
-
     let _problem = new FormGroup({
-      problemName: new FormControl(''),
-      timeLimit: new FormControl(''),
-      memoryLimit: new FormControl(''),
+      ProblemName: new FormControl(''),
+      ExecutionTime: new FormControl(''),
+      MemoryLimit: new FormControl(''),
       ProblemDescription: new FormControl('')
     });
 
@@ -133,9 +129,24 @@ addProblems(){
   }
 
   finishContest(){
-    let problems: Problems = this.problems.value;
-    console.log(problems);
-    this.api.postProblems(this.data['id'], problems).subscribe({
+    /*
+      ProblemName: string;
+      ProblemDescription: File;
+      MemoryLimit: number;
+      ExecutionTime: number;
+    */
+
+    for(let i = 0; i < this.problems.value.length; ++i){
+      let temp = new FormData(); 
+      temp.append("ProblemName", this.problems.value[i]["ProblemName"]);
+      temp.append("ProblemDescription", this.files[i]);
+      temp.append("MemoryLimit", this.problems.value[i]["MemoryLimit"]);
+      temp.append("ExecutionTime", this.problems.value[i]["ExecutionTime"]);
+
+      this.formdata.push(temp);
+    }
+
+    this.api.postProblems(this.data['id'], this.formdata).subscribe({
       next:()=>{
         this.contestCreated = true;
         alert("Contest Created")
