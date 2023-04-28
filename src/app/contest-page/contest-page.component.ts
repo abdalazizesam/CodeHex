@@ -1,9 +1,12 @@
-import { Component, ElementRef, ViewChild, OnInit, Inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Inject, NgZone } from '@angular/core';
 import { ContestService } from '../contest.service';
 import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog'
 import { ApiService } from '../services/api.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { AuthService } from '../auth/auth.service';
+import { CreateContestComponent } from '../create-contest/create-contest.component';
+import { SubmitPageComponent } from '../submit-page/submit-page.component';
 
 export interface PeriodicElement {
   name: string;
@@ -11,6 +14,7 @@ export interface PeriodicElement {
   timeLimit: number;
   memoryLimit: string;
 }
+
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'A Warm Introduction', timeLimit: 1, memoryLimit: '256 megabytes'},
@@ -34,6 +38,8 @@ export class ContestPageComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
+    private zone: NgZone,
+    private matDialog: MatDialog,
     private api : ApiService){}
 
     ngOnInit(): void {
@@ -66,6 +72,20 @@ export class ContestPageComponent implements OnInit {
           window.open("https://drive.google.com/file/d/1jKalN5JEXLdJs6jy3UF8kwlIlrx4KoGe/view")
           break;
       }
+    }
+
+    openSubmit() {
+      this.zone.run(() => {
+      this.matDialog.open(SubmitPageComponent,{ 
+        width: '600px',
+      })
+    })
+    }
+
+    submitProblem(element: any){
+      data: element
+      console.log(element)
+      this.openSubmit()
     }
 
 

@@ -1,0 +1,56 @@
+.code-editor {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background-color: #497174;
+    margin: 20px;
+  }
+  
+  .code-header {
+    background-color: #497174;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .code-area {
+    height: 300px;
+    width: 100%;
+    font-family: monospace;
+    padding: 10px;
+    border: none;
+    outline: none;
+    resize: none;
+    background-color: #2b2b2b;
+    color: #fff;
+  }
+  
+  .code-area::placeholder {
+    color: #bbb;
+  }
+
+  .submit-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #497174;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .5s;
+
+  }
+  
+  .submit-btn:hover {
+    background-color: #82CD47;
+    color: #fff;
+    transition: all .5s;
+  }
+  

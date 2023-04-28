@@ -31,7 +31,7 @@ export class AdminProblemsetComponent implements OnInit {
     console.log(this.editContest);
   }
  
-  openDialog() {
+  openCreate() {
     this.zone.run(() => {
     this.matDialog.open(CreateContestComponent,{ 
       width: '600px',

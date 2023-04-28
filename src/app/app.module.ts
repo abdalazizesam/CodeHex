@@ -27,6 +27,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { ContestPageComponent } from './contest-page/contest-page.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { SubmitPageComponent } from './submit-page/submit-page.component';
 
 
 
@@ -52,6 +53,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
     AdminProblemsetComponent,
     ContestPageComponent,
     ScoreboardComponent,
+    SubmitPageComponent,
   ],
   imports: [
     BrowserModule,
