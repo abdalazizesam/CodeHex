@@ -11,21 +11,21 @@
             <table mat-table [dataSource]="dataSource" matSort>
           
               <!-- ContestName Column -->
-              <ng-container matColumnDef="ContestName">
+              <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Contest Name </th>
-                <td mat-cell *matCellDef="let row"> <a (click)="getAllContests()" routerLink="../contestpage" routerLinkActive="active" id="contestLink" >{{row.ContestName}}</a> </td>
+                <td mat-cell *matCellDef="let row"> <a (click)="getAllContests()" routerLink="../contestpage" routerLinkActive="active" id="contestLink" >{{row.name}}</a> </td>
               </ng-container>
           
               <!-- StartDate Column -->
-              <ng-container matColumnDef="StartDate">
+              <ng-container matColumnDef="start_at">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
-                <td mat-cell *matCellDef="let row"> {{row.StartDate}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.start_at}} </td>
               </ng-container>
           
               <!-- EndDate Column -->
-              <ng-container matColumnDef="EndDate">
+              <ng-container matColumnDef="end_in">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
-                <td mat-cell *matCellDef="let row"> {{row.EndDate}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.end_in}} </td>
               </ng-container>
           
           

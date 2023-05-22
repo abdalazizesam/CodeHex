@@ -29,6 +29,11 @@ import { ContestPageComponent } from './contest-page/contest-page.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { SubmitPageComponent } from './submit-page/submit-page.component';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { CookieService } from 'ngx-cookie-service';
+import { EditPageComponent } from './edit-page/edit-page.component';
+import { MySubmitionComponent } from './my-submition/my-submition.component';
+import { AddProblemsComponent } from './add-problems/add-problems.component';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +48,9 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
     ContestPageComponent,
     ScoreboardComponent,
     SubmitPageComponent,
+    EditPageComponent,
+    MySubmitionComponent,
+    AddProblemsComponent,
     
   ],
   imports: [
@@ -65,7 +73,8 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
     MatTableModule, 
     MatPaginatorModule,
     MatSortModule,
-    HighlightModule
+    HighlightModule,  
+
     
   ],
   providers: [
@@ -77,7 +86,10 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
         
       }
     }
+    ,CookieService
   ],
+  
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

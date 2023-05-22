@@ -15,7 +15,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HomepageComponent implements OnInit {
   constructor(private matDialog: MatDialog,private api: ApiService,private authService: AuthService){}
-  displayedColumns: string[] = ['ContestName','StartDate', 'EndDate'];
+  displayedColumns: string[] = ['name','start_at', 'end_in'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

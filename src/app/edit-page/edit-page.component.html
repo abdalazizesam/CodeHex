@@ -1,0 +1,26 @@
+<form id="mainForm" #mainForm="ngForm" (ngSubmit)="editContest(mainForm, editData)" >
+    <div id="contestDiv" *ngIf="!contestCreated"> 
+    
+    <mat-form-field appearance="outline" id="contestForm">
+      <mat-label>Contest Name</mat-label>
+      <input ngModel name="name"  matInput type="name" placeholder="Ex. CodeHex Contest" required>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" id="contestForm">
+      <mat-label>Start Time</mat-label>
+      <input ngModel name="start_at" matInput type="datetime-local" placeholder="start date" required>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" id="contestForm">
+      <mat-label>End Time</mat-label>
+      <input ngModel name="end_in" matInput type="datetime-local" placeholder="start date" required>
+    </mat-form-field>
+    
+    </div>
+    
+    
+    <button *ngIf="!contestCreated" type="submit" id="newProblem" mat-raised-button color="accent" (click)="addProblems()">Save Contest</button>
+    <button *ngIf="!contestCreated" type="submit" id="newProblem" mat-raised-button color="accent" (click)="addProblems()">Edit Problems</button>
+
+    </form>
+    

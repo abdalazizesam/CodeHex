@@ -8,12 +8,22 @@ export class ApiService {
 
   constructor(private http : HttpClient) {}
 
+  public linkdata: string = 'https://57vvl80z-7132.uks1.devtunnels.ms/';
+
   
 
   postContest(data: any){
     let headers = new HttpHeaders()
-    .set("Access-Control-Allow-Origin", "*");
-    return this.http.post<any>("https://localhost:7078/api/contest", data, {headers});
+    .set("Bypass-Tunnel-Reminder", "*");
+    return this.http.post<any>(`${this.linkdata}contest/`, data, {headers});
+  }
+
+  deleteContest(id: any){
+    return this.http.delete<any>(`${this.linkdata}contest/${id}`);
+  }
+
+  editContest(data: any){
+    return this.http.put<any>(`${this.linkdata}contest/${data.id}`, data);
   }
   postProblems(id:number, data: any){
     console.log(data);
@@ -21,12 +31,15 @@ export class ApiService {
     .set("Access-Control-Allow-Origin", "*")
     .set('Content-Type', 'multipart/form-data');
 
-    return this.http.post<any>(`https://localhost:7078/api/Problem/Problems?contestId=${id}`, data, {headers});
+    return this.http.post<any>(`${this.linkdata}contest/${id}/problems`, data, {headers});
   }
 
   getContest(){
-    return this.http.get<any>("http://localhost:3000/contestList");
+    let headers = new HttpHeaders()
+    .set("ngrok-skip-browser-warning", "true");
+    return this.http.get<any>(`${this.linkdata}contests`,{headers});
   }
+  
   getProblems(){
     return this.http.get<any>("http://localhost:3000/problemList");
   }

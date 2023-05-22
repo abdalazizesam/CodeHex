@@ -1,17 +1,28 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError ,tap } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { throwError, Subject, Observable } from 'rxjs';
 import { User } from "./user.model";
+import { CookieService } from 'ngx-cookie-service';
+import { ApiService } from '../services/api.service';
 
-export interface AuthResponseData {
-    kind: string;
-    idToken: string;
+
+
+
+// export interface AuthResponseData {
+//     kind: string;
+//     idToken: string;
+//     email: string;
+//     refreshToken: string;
+//     expiresIn: string;
+//     localId: string;
+//     registered?: boolean;
+// };
+
+
+export interface Response {
     email: string;
-    refreshToken: string;
-    expiresIn: string;
-    localId: string;
-    registered?: boolean;
+    password: string;
 };
 
 @Injectable ({providedIn: 'root'})
@@ -19,12 +30,15 @@ export class AuthService {
 
     user = new Subject<User>();
 
+    linkdata = this.api.linkdata;
 
-    constructor(private http: HttpClient){
+
+
+    constructor(private http: HttpClient, private cookie: CookieService, private api: ApiService){
 
     }
     signup(email: string, password: string){
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBkSXbHRcg7IpMiIeAHb_WGE58EdhPwkBY',
+        return this.http.post<any>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBkSXbHRcg7IpMiIeAHb_WGE58EdhPwkBY',
         {
             email: email,
             password: password,
@@ -32,13 +46,18 @@ export class AuthService {
         }
         ).pipe(catchError(this.handleError),tap(resData => this.handleAuthentication(resData.email, resData.localId, resData.idToken,+resData.expiresIn)));
     }
-    login(email: string, password: string){
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBkSXbHRcg7IpMiIeAHb_WGE58EdhPwkBY',
-        {
-            email: email,
-            password: password,
-            returnSecureToken: true
-        }).pipe(catchError(this.handleError),tap(resData => this.handleAuthentication(resData.email, resData.localId, resData.idToken,+resData.expiresIn)));
+    login(email: string, password: string): Observable<any>{
+        console.log(email);
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const data = { email, password };
+
+        // return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBkSXbHRcg7IpMiIeAHb_WGE58EdhPwkBY',
+        // {
+        //     email: email,
+        //     password: password,
+        //     returnSecureToken: true
+        // }).pipe(catchError(this.handleError),tap(resData => this.handleAuthentication(resData.email, resData.localId, resData.idToken,+resData.expiresIn)));
+        return this.http.post(`${this.linkdata}login`,data, { headers });
     }
     private handleAuthentication(email: string,userId: string, token: string, expiresIn: number){
         const expirationDate = new Date(new Date().getTime() + +expiresIn*1000);

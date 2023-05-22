@@ -6,6 +6,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AdminProblemsetComponent } from './admin-problemset/admin-problemset.component';
 import { ContestPageComponent } from './contest-page/contest-page.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { MySubmitionComponent } from './my-submition/my-submition.component';
 
 const routes: Routes = [
   { path: 'problemset', component:ProblemsetComponent},
@@ -13,7 +14,9 @@ const routes: Routes = [
   {path: 'home', component:HomepageComponent},
   {path: 'createcontest', component:AdminProblemsetComponent},
   {path: 'contestpage', component:ContestPageComponent},
-  {path: 'scoreboard', component:ScoreboardComponent}
+  {path: 'scoreboard', component:ScoreboardComponent},
+  {path: 'mysubmition', component: MySubmitionComponent}
+
 ];
 
 @NgModule({

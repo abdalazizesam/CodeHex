@@ -77,7 +77,7 @@ export class ContestPageComponent implements OnInit {
     openSubmit() {
       this.zone.run(() => {
       this.matDialog.open(SubmitPageComponent,{ 
-        width: '600px',
+        width: '800px', height: '650px',
       })
     })
     }

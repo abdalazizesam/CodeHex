@@ -1,10 +1,8 @@
 import { Component, ElementRef, ViewChild, OnInit, Inject} from '@angular/core';
-import { ContestService } from '../contest.service';
 import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } from '@angular/forms';
-import { ApiService } from '../services/api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { DialogRef } from '@angular/cdk/dialog';
 import { AuthService } from '../auth/auth.service';
+import { ApiService } from '../services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,6 +13,7 @@ interface Contest{
   name: string;
   start_at: Date;
   end_in: Date;
+  id:string;
 }
 
 interface Problems{
@@ -33,11 +32,12 @@ interface ContestWithProblems{
 }
 
 @Component({
-  selector: 'app-creat-contest',
-  templateUrl: './create-contest.component.html',
-  styleUrls: ['./create-contest.component.css']
+  selector: 'app-edit-page',
+  templateUrl: './edit-page.component.html',
+  styleUrls: ['./edit-page.component.css']
 })
-export class CreateContestComponent{
+export class EditPageComponent {
+
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private api : ApiService,
@@ -62,6 +62,7 @@ export class CreateContestComponent{
 ngOnInit(): void {
   this.authService.autoLogin();
   this.getAllContests();
+
 }
 
 
@@ -74,7 +75,6 @@ getAllContests(){
     },
     error:(err)=>{
       alert("Error while fetching the records!!")
-
     }
   })
 }
@@ -84,8 +84,6 @@ getAllContests(){
 getfile(event: any){ 
   const file = event.target.files[0];
   this.files.push(file);
-
-  console.log(this.files);
   
 }
 
@@ -98,6 +96,7 @@ addProblems(){
     });
 
     this.problems.push(_problem);
+    
   }
 
 
@@ -107,22 +106,22 @@ addProblems(){
   }
 
 
-  createContest(form: NgForm){  
+  editContest(form: NgForm, editData: any){  
 
     let Contest: Contest = 
     {
       name: form.value.name,
       start_at: form.value.start_at,
       end_in: form.value.end_in,
+      id: editData.id
     }
 
-    this.api.postContest(Contest).subscribe({
+    this.api.editContest(Contest).subscribe({
       next:(data)=>{
-        this.contestCreated = true;
         this.data = data;
         console.log(this.data);
-        alert("Contest Created")
-        this.problems.reset();
+        alert("Changes Saved!");
+        location.reload();
       },
       error:()=>{
         alert("error while creating contest")
@@ -166,4 +165,5 @@ addProblems(){
   OnSubmit(){
 
   }
+
 }

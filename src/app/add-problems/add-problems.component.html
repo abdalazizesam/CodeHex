@@ -1,0 +1,33 @@
+
+<div *ngFor="let problem of problems.controls; let i = index" id="mainform">
+
+    <ng-container [formGroup]="problem" id="problemForm">
+      <label>Problem {{i + 1}}</label>
+    
+      <mat-form-field appearance="outline" id="problemField" color="accent">
+        <mat-label>Problem Name</mat-label>
+        <input matInput formControlName="problemName" type="name" placeholder="Ex. Watermelon" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" id="problemField" color="accent">
+        <mat-label>Time Limit</mat-label>
+        <input  formControlName="time_Limit" matInput type="number" placeholder="Ex. Limit: 1 seconds" required>
+      </mat-form-field> 
+    
+      <mat-form-field appearance="outline" id="problemField" color="accent">
+        <mat-label>Memory Limit</mat-label>
+        <input  formControlName="memory_Limit" matInput type="number" placeholder="Ex. Limit: 1024 MB"  required>
+      </mat-form-field> 
+      <div  id="uploadLabel">
+      <mat-icon fontIcon="upload"></mat-icon>
+      <label> Problem </label>
+      <input formControlName="probelmFile" id="uploadProblem" type="file" (change)="getfile($event)">
+      <label for="uploadProblem" > File Upload</label>
+      </div>
+    </ng-container>
+      
+  </div>
+
+  <button type="button" id="newProblem" mat-raised-button color="warn" (click)="removeProblems()" >Remove Last Problem</button>
+  <button  type="button" id="newProblem" mat-raised-button color="primary" (click)="addProblems()">Add New Problem</button>
+  <button  type="button" id="newProblem" mat-raised-button color="accent" (click)="finishContest()">Finish Contest</button>

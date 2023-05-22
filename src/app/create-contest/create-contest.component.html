@@ -3,23 +3,23 @@
 
 <mat-form-field appearance="outline" id="contestForm">
   <mat-label>Contest Name</mat-label>
-  <input ngModel name="contestName"  matInput type="name" placeholder="Ex. CodeHex Contest" required>
+  <input ngModel name="name"  matInput type="name" placeholder="Ex. CodeHex Contest" required>
 </mat-form-field>
 
 <mat-form-field appearance="outline" id="contestForm">
   <mat-label>Start Time</mat-label>
-  <input ngModel name="startTime" matInput type="datetime-local" placeholder="start date">
+  <input ngModel name="start_at" matInput type="datetime-local" placeholder="start date" required>
 </mat-form-field>
 
 <mat-form-field appearance="outline" id="contestForm">
   <mat-label>End Time</mat-label>
-  <input ngModel name="endTime" matInput type="datetime-local" placeholder="start date">
+  <input ngModel name="end_in" matInput type="datetime-local" placeholder="start date" required>
 </mat-form-field>
 
 </div>
 
 
-<div *ngFor="let problem of problems.controls; let i = index" class="container">
+<div *ngFor="let problem of problems.controls; let i = index"  class="container">
 
   <ng-container [formGroup]="problem" id="problemForm">
     <label>Problem {{i + 1}}</label>

@@ -8,8 +8,14 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EditPageComponent } from '../edit-page/edit-page.component';
+import { AddProblemsComponent } from '../add-problems/add-problems.component';
 
-
+interface Contest{
+  name: string;
+  start_at: Date;
+  end_in: Date;
+}
 
 @Component({
   selector: 'app-admin-problemset',
@@ -18,7 +24,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AdminProblemsetComponent implements OnInit {
 
-  displayedColumns: string[] = ['ContestName','StartDate', 'EndDate', 'functions'];
+  displayedColumns: string[] = ['ContestName','StartDate', 'EndDate','NoProblems', 'visibility', 'functions'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -38,10 +44,32 @@ export class AdminProblemsetComponent implements OnInit {
     })
   })
   }
+public rowdata : string = '0';
 
+getContestId(row: any){
+ this.rowdata = row.id;
+}
+  
 
 editContest(row: any){
-  this.matDialog.open(CreateContestComponent,{ 
+  console.log(row);
+
+   const rowdata: Contest = {
+    name: row.name,
+    start_at: row.start_at,
+    end_in: row.end_in
+   } 
+  console.log(rowdata);
+
+  this.matDialog.open(EditPageComponent,{ 
+    width: '600px',
+    data: row
+  })
+}
+
+createProblems(row: any){
+
+  this.matDialog.open(AddProblemsComponent,{ 
     width: '600px',
     data: row
   })
@@ -59,6 +87,13 @@ editContest(row: any){
 
       }
     })
+  }
+
+  deleteContest(id: any){
+    this.api.deleteContest(id).subscribe( response =>{ console.log('Contest deleted successfully');
+    location.reload();},
+    error => console.error('Error deleting contest:', error));
+    
   }
   
 

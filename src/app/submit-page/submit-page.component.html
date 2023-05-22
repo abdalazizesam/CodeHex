@@ -1,3 +1,5 @@
+
+<form>
 <div class="code-editor">
     <div class="code-header">
       <span>Code Editor</span>
@@ -5,10 +7,24 @@
       <div
       class="app-ace-editor"
       #editor
-      style="width: 500px;height: 250px;"
+      style="width: 600px;height: 390px;"
     >
   </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="onSelectionChange($event)">
+      <mat-option value="cpp">C++</mat-option>
+      <mat-option value="c#">C#</mat-option>
+      <mat-option value="java">JAVA</mat-option>
+      <mat-option value="python">Python</mat-option>
+
+    </mat-select>
+  </mat-form-field>
 
 
     <button type="submit" class="submit-btn">Submit</button>
 </div>
+</div>
+</form>
+
