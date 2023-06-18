@@ -8,7 +8,7 @@ export class ApiService {
 
   constructor(private http : HttpClient) {}
 
-  public linkdata: string = 'https://57vvl80z-7132.uks1.devtunnels.ms/';
+  public linkdata: string = 'https://17dgstk2-7132.uks1.devtunnels.ms/';
 
   
 
@@ -27,11 +27,8 @@ export class ApiService {
   }
   postProblems(id:number, data: any){
     console.log(data);
-    let headers = new HttpHeaders()
-    .set("Access-Control-Allow-Origin", "*")
-    .set('Content-Type', 'multipart/form-data');
 
-    return this.http.post<any>(`${this.linkdata}contest/${id}/problems`, data, {headers});
+    return this.http.post<any>(`${this.linkdata}contest/${id}/problem`, data);
   }
 
   getContest(){
@@ -41,6 +38,21 @@ export class ApiService {
   }
   
   getProblems(){
-    return this.http.get<any>("http://localhost:3000/problemList");
+    return this.http.get<any>(`${this.linkdata}contest/problems`);
+  }
+
+  getProblemsC( id:number){
+    return this.http.get<any>(`${this.linkdata}contest/${id}/problems`);
+  }
+  getContestD(id:number){
+    let headers = new HttpHeaders()
+    .set("ngrok-skip-browser-warning", "true");
+    return this.http.get<any>(`${this.linkdata}contest/${id}`,{headers});
+  }
+
+  getProblemFile(id:number){
+    let headers = new HttpHeaders()
+    .set("ngrok-skip-browser-warning", "true");
+    return this.http.get<any>(`${this.linkdata}problem/${id}`,{headers});
   }
 }

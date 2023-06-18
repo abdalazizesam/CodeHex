@@ -11,7 +11,7 @@
             </ng-container>
           
             <!-- Name Column -->
-            <ng-container matColumnDef="name-problem">
+            <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef> Name </th>
               <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
@@ -19,13 +19,13 @@
             <!-- Weight Column -->
             <ng-container matColumnDef="time-limit">
               <th mat-header-cell *matHeaderCellDef> Time Limit (sec) </th>
-              <td mat-cell *matCellDef="let element"> {{element.timeLimit}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.time_Limit}} </td>
             </ng-container>
           
             <!-- Symbol Column -->
             <ng-container matColumnDef="memory-limit">
               <th mat-header-cell *matHeaderCellDef> Memory Limit </th>
-              <td mat-cell *matCellDef="let element"> {{element.memoryLimit}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.memory_Limit}} </td>
             </ng-container>
 
             <ng-container matColumnDef="functions">

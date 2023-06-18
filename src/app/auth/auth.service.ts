@@ -51,12 +51,12 @@ export class AuthService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         const data = { email, password };
 
-        // return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBkSXbHRcg7IpMiIeAHb_WGE58EdhPwkBY',
-        // {
-        //     email: email,
-        //     password: password,
-        //     returnSecureToken: true
-        // }).pipe(catchError(this.handleError),tap(resData => this.handleAuthentication(resData.email, resData.localId, resData.idToken,+resData.expiresIn)));
+        return this.http.post<any>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBkSXbHRcg7IpMiIeAHb_WGE58EdhPwkBY',
+        {
+            email: email,
+            password: password,
+            returnSecureToken: true
+        }).pipe(catchError(this.handleError),tap(resData => this.handleAuthentication(resData.email, resData.localId, resData.idToken,+resData.expiresIn)));
         return this.http.post(`${this.linkdata}login`,data, { headers });
     }
     private handleAuthentication(email: string,userId: string, token: string, expiresIn: number){

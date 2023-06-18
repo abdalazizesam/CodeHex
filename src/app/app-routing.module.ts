@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'auth', component:AuthComponent},
   {path: 'home', component:HomepageComponent},
   {path: 'createcontest', component:AdminProblemsetComponent},
-  {path: 'contestpage', component:ContestPageComponent},
+  {path: 'contest/:id', component:ContestPageComponent},
   {path: 'scoreboard', component:ScoreboardComponent},
   {path: 'mysubmition', component: MySubmitionComponent}
 

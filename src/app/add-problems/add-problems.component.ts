@@ -8,6 +8,8 @@ import { AuthService } from '../auth/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { idText } from 'typescript';
+import { AdminProblemsetComponent } from '../admin-problemset/admin-problemset.component';
 
 interface Problems{
   problemName: string;
@@ -31,11 +33,19 @@ interface ContestWithProblems{
 })
 export class AddProblemsComponent {
 
+
+  @ViewChild('getContestId') adminProblemset!: AdminProblemsetComponent;
+
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private api : ApiService,
-    @Inject(MAT_DIALOG_DATA) public editData: any,
+    @Inject(MAT_DIALOG_DATA) public problemData: any,
     private dialogRef: MatDialogRef<any> ){}
+
+    dataSource!: MatTableDataSource<any>;
+
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
     problems: any = new FormArray([]);
     data: any; 
@@ -69,6 +79,8 @@ export class AddProblemsComponent {
     result: any
 
 
+
+
     finishContest(){
       /*
         ProblemName: string;
@@ -78,21 +90,23 @@ export class AddProblemsComponent {
       */
      
       for(let i = 0; i < this.problems.value.length; ++i){
-      //   let temp = new FormData(); 
-      //   // temp.append("ProblemName", this.problems.value[i]["ProblemName"]);
-      //   temp.append("probelmFile", this.files[i]);
-      //   temp.append("memory_Limit", this.problems.value[i]["memory_Limit"]);
-      //   temp.append("time_Limit", this.problems.value[i]["time_Limit"]);
-  
-      //   this.formdata.push(temp);
-      const file = this.files[i];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = async(arg:any) => {
-        this.result = await arg.target.result
-      };
-      console.log(this.result);
+        let temp = new FormData(); 
+        // temp.append("ProblemName", this.problems.value[i]["ProblemName"]);
+        temp.append("ProbelmFile", this.files[i]);
+        temp.append("Name", this.problems.value[i]["problemName"]);
+        temp.append("Memory_Limit", this.problems.value[i]["memory_Limit"]);
+        temp.append("Time_Limit", this.problems.value[i]["time_Limit"]);
 
+        this.formdata.push(temp);
+
+        console.log(this.problemData.id)
+      // const file = this.files[i];
+      // const reader = new FileReader();
+      // reader.readAsDataURL(file);
+      // reader.onload = async(arg:any) => {
+      // this.result = await arg.target.result
+      // };
+      // console.log(this.result);
 
       // let temp:Problems = {
         
@@ -101,18 +115,20 @@ export class AddProblemsComponent {
 
 
      }
-  
-      this.api.postProblems(this.data['id'], this.formdata).subscribe({
-        next:()=>{
-          alert("Contest Created")
-          this.problems.reset();
-          this.dialogRef.close();
-        },
-        error:()=>{
-          alert("error while creating contest")
-        }
-      })
-    }
+   for(let i = 0; i < this.formdata.length; i++){
+    this.api.postProblems(this.problemData.id, this.formdata[i]).subscribe({
+      next:()=>{
+        alert("Contest Created")
+        this.problems.reset();
+        this.dialogRef.close();
+      },
+      error:()=>{
+        alert("error while creating contest")
+      }
+    })
+  }
+   }
+      
 
 }
 function bota(arg0: File): string | Blob {

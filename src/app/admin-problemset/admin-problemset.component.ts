@@ -29,6 +29,7 @@ export class AdminProblemsetComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  
 
   constructor(private matDialog: MatDialog, private api: ApiService, private zone: NgZone){}
 
@@ -68,11 +69,20 @@ editContest(row: any){
 }
 
 createProblems(row: any){
+  console.log(row);
 
+   const rowdata: Contest = {
+    name: row.name,
+    start_at: row.start_at,
+    end_in: row.end_in
+   } 
+  console.log(rowdata);
+  this.zone.run(() => {
   this.matDialog.open(AddProblemsComponent,{ 
     width: '600px',
     data: row
   })
+})
 }
 
   getAllContests(){

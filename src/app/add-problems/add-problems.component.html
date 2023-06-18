@@ -1,5 +1,6 @@
 
-<div *ngFor="let problem of problems.controls; let i = index" id="mainform">
+<div id="mainform" class="container">
+<div *ngFor="let problem of problems.controls; let i = index" >
 
     <ng-container [formGroup]="problem" id="problemForm">
       <label>Problem {{i + 1}}</label>
@@ -28,6 +29,10 @@
       
   </div>
 
+  
   <button type="button" id="newProblem" mat-raised-button color="warn" (click)="removeProblems()" >Remove Last Problem</button>
   <button  type="button" id="newProblem" mat-raised-button color="primary" (click)="addProblems()">Add New Problem</button>
   <button  type="button" id="newProblem" mat-raised-button color="accent" (click)="finishContest()">Finish Contest</button>
+
+
+</div>

@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild, OnInit, Inject, NgZone } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ContestService } from '../contest.service';
 import { FormBuilder, FormGroup, NgForm, Validators, FormControl, FormArray } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog'
@@ -7,24 +8,20 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { AuthService } from '../auth/auth.service';
 import { CreateContestComponent } from '../create-contest/create-contest.component';
 import { SubmitPageComponent } from '../submit-page/submit-page.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { idText } from 'typescript';
+
 
 export interface PeriodicElement {
   name: string;
   position: number;
-  timeLimit: number;
-  memoryLimit: string;
+  time_Limit: number;
+  memory_Limit: string;
 }
 
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'A Warm Introduction', timeLimit: 1, memoryLimit: '256 megabytes'},
-  {position: 2, name: 'Finding a Worthy Challenge', timeLimit: 2, memoryLimit: '256 megabytes'},
-  {position: 3, name: 'Defense Skills', timeLimit: 2, memoryLimit: '256 megabytes'},
-  {position: 4, name: 'Power To Conquer', timeLimit: 2, memoryLimit: '512 megabytes'},
-  {position: 5, name: 'How Spells Are Made', timeLimit: 6, memoryLimit: '512 megabytes'},
-  {position: 6, name: 'The Shooting Test', timeLimit: 1, memoryLimit: '256 megabytes'},
-  {position: 7, name: 'Power To Conquer (pt.2)', timeLimit: 2, memoryLimit: '512 megabytes'}
-];
 
 @Component({
   selector: 'app-contest-page',
@@ -33,45 +30,67 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ContestPageComponent implements OnInit {
 
-  displayedColumns: string[] = ['no-problem', 'name-problem', 'time-limit', 'memory-limit','functions'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['no-problem', 'name', 'time-limit', 'memory-limit','functions'];
+  dataSource!: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private authService: AuthService,
     private zone: NgZone,
     private matDialog: MatDialog,
     private api : ApiService){}
 
+
+    getProblems(id:number){
+      this.api.getProblemsC(id).subscribe({
+        next:(res)=>{
+          this.dataSource = new MatTableDataSource(res);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error:(err)=>{
+          alert("Error while fetching the records!!")
+        }
+      })
+    }
+
+    getContestName(id:number){
+      this.api.getContestD(id).subscribe({
+        next:(res)=>{
+
+
+        },
+        error:(err)=>{
+          alert("Error while fetching the records!!")
+        }
+      })
+    }
+
     ngOnInit(): void {
       this.authService.autoLogin();
+      this.route.params.subscribe(params => {
+        const id = params['id'];
+        this.getProblems(id)
+      });
+  
     }
+
 
     viewPDF(element: any){
       data: element
-      console.log(element)
-      switch(element.position) {
-        case 1:
-          window.open("https://drive.google.com/file/d/1yg-na-9dqyWadzf0XuNJxDskaDAxk4JT/view")
-          break;
-        case 2:
-          window.open("https://drive.google.com/file/d/13NWNmGc9ODiLUzXhRxzTsLEOyCJpQPr1/view")
-          break;
-        case 3:
-          window.open("https://drive.google.com/file/d/17XuK09ag-ja4PYgbHIVoioGHrNfv958h/view")
-          break;
-        case 4:
-          window.open("https://drive.google.com/file/d/1mgwf3lQsh11h1_o_f7BQ6NERt-VfRKff/view")
-          break;
-        case 5:
-          window.open("https://drive.google.com/file/d/1UHAGJId56tFmjxXFuBAhffNzOWXIXoRF/view")
-          break;
-        case 6:
-          window.open("https://drive.google.com/file/d/1dDRwh1akkwKSrDdN5pUragUaQWjn-YGp/view")
-          break;
-        case 7:
-          window.open("https://drive.google.com/file/d/1jKalN5JEXLdJs6jy3UF8kwlIlrx4KoGe/view")
-          break;
-      }
+      console.log(element.id)
+      
+      this.api.getProblemFile(element.id).subscribe({
+        next:(res)=>{},
+        error:(res)=>{
+          console.log(res)
+
+          window.open(res.url,'_blank'); 
+        }
+      })
     }
 
     openSubmit() {
