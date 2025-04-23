@@ -21,11 +21,5 @@
 
 
 ## 📸 Screenshot
-![Login Page](https://imgur.com/sS0eyid)
-![Scoreboard](https://imgur.com/at1LokM)
-![Create Contest](https://imgur.com/lNn22bR)
-![Create Problem](https://imgur.com/ecDol3a)
-![Contests List](https://imgur.com/rnM0f9k)
-![Problem Submit](https://imgur.com/WCGPj95)
-
+https://imgur.com/a/MVTrkCC
 
