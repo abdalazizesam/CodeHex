@@ -1,28 +1,31 @@
-# FinalProject
+# 🧠 CodeHex - Contest Management System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.5.
+**CodeHex** is a modern web-based **Programming Problem-Solving Contest Management System**, designed to help organizers create, run, and manage coding competitions efficiently. Built with Angular, the system is clean, fast, and optimized for an intuitive user experience.
 
-## Development server
+## 🚀 Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- 📝 **Contest Creation**: Add contests with custom names, start/end times, and descriptions.
+- 🔐 **User Authentication**: Secure login system for participants and admins.
+- 📄 **Problem Management**: Add/edit programming problems with sample test cases.
+- 📊 **Real-time Rankings**: Leaderboard updates based on correct submissions and penalty time.
+- 🧪 **Submission System**: Users can submit code and receive verdicts (simulation via mock API).
 
-## Code scaffolding
+## 🛠 Tech Stack
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| Layer        | Technology        |
+|--------------|-------------------|
+| Framework    | Angular (v15.1.5) |
+| Language     | TypeScript        |
+| Styles       | CSS / SCSS        |
+| Dev Tools    | Angular CLI, VSCode |
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 📸 Screenshot
+![Login Page](https://imgur.com/sS0eyid)
+![Scoreboard](https://imgur.com/at1LokM)
+![Create Contest](https://imgur.com/lNn22bR)
+![Create Problem](https://imgur.com/ecDol3a)
+![Contests List](https://imgur.com/rnM0f9k)
+![Problem Submit](https://imgur.com/WCGPj95)
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# CodeHex
